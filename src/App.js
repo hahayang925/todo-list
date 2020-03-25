@@ -6,14 +6,9 @@ import { Button } from 'antd';
 import StoreProvider from './store';
 import TodoForm from './components/TodoForm';
 import List from './components/List';
-// import TodoListContext from './store/TodoListContext';
 
 function App() {
   const [isModalShow, toggleModal] = useState(false);
-
-  // useEffect(() => {
-  //   const localTodos = localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : [];
-  // }, []);
 
   return (
     <div className="App">
