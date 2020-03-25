@@ -50,7 +50,7 @@ const ListItem = ({ todo: { content, date, status, id }, onChange, deleteTodo, e
 ListItem.propTypes = {
   todo: PropTypes.shape({
     content: PropTypes.string.isRequired,
-    date: PropTypes.instanceOf(Date).isRequired,
+    date: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
   }),

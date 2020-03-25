@@ -14,7 +14,7 @@ const TodoForm = ({ isModalShow, onCancel, title, id }) => {
   const onChange = (e) => {
     const data = {
       content: e.target.value,
-      date: new Date(),
+      date: new Date().getTime(),
       status: todo.status || 'undone',
       id: todo.id || uuidv4(),
     };

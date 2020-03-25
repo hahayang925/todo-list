@@ -16,7 +16,7 @@ const StoreProvider = ({ children }) => {
       store.todos = store.todos.map((todo) => {
         if (todo.id === id) {
           const status = todo.status === 'undone' ? 'done' : 'undone';
-          const date = new Date();
+          const date = new Date().getTime();
           return { ...todo, status, date };
         }
         return todo;
