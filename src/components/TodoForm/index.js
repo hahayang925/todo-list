@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useObserver } from 'mobx-react';
 import PropTypes from 'prop-types';
 
-import { Input, Button, Col, Row, Modal } from 'antd';
+import { Input, Col, Row, Modal } from 'antd';
 import TodoListContext from '../../store/TodoListContext';
 
 const TodoForm = ({ isModalShow, onCancel, title, id }) => {
@@ -45,10 +45,7 @@ const TodoForm = ({ isModalShow, onCancel, title, id }) => {
       {/* change into form */}
       <Row justify="between" align="center" gutter="16">
         <Col span={12}>
-          <Input placeholder="todos..." value={todo.content} onChange={onChange} onPressEnter={() => addTodo()} />
-        </Col>
-        <Col span={4}>
-          <Button style={{ width: '100%' }} onClick={addTodo}>Add</Button>
+          <Input placeholder="todos..." value={todo.content} onChange={onChange} onPressEnter={(e) => { e.stopPropagation(); addTodo(); }} />
         </Col>
       </Row>
     </Modal>

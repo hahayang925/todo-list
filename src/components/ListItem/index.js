@@ -38,6 +38,7 @@ const ListItem = ({ todo: { content, date, status, id }, onChange, deleteTodo, e
         </TextCol>
       </Row>
       <TodoForm
+        key={Math.random()}
         isModalShow={isModalShow}
         onCancel={() => toggleModal(false)}
         id={id}
