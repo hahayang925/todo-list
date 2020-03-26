@@ -9,7 +9,6 @@ import List from '../components/List';
 function ManageTodo() {
   const [isModalShow, toggleModal] = useState(false);
   const { todos } = useContext(TodoListContext);
-  console.log('renderrrrrrr');
 
   return useObserver(() => (
     <main className="App" style={{ margin: '0 auto' }}>

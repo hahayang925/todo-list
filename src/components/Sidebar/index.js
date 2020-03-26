@@ -1,26 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 
-const Sidebar = ({ history, match }) => {
+const Sidebar = () => {
   const menuList = [
     { name: 'Todo', router: '/' },
     { name: 'About', router: '/about' },
     { name: 'Done', router: '/done' },
   ];
   const [selectedMenu, setSelectedMenu] = useState('Todo');
+  const location = useLocation();
 
   useEffect(() => {
-    // const currRoute = match.url;
-    console.log({ match, history });
-    // setSelectedMenu(menuList.find((menu) => menu.router === currRoute).name);
-  }, [history, match]);
+    setSelectedMenu(menuList.find((menu) => menu.router === location.pathname).name);
+  }, [location]);
 
   const handleClick = (e) => {
     if (e.key !== undefined) {
       setSelectedMenu(e.key);
-      const matchRoute = menuList.find((menu) => menu.key === e.key);
-      if (matchRoute) history.push(matchRoute.path);
     }
   };
 
