@@ -7,7 +7,6 @@ import TodoListContext from './TodoListContext';
 const StoreProvider = ({ children }) => {
   const store = useLocalStore(() => ({
     todos: localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : [],
-    showModal: false,
     addTodo: (todo) => {
       store.todos.unshift(todo);
       localStorage.setItem('todos', JSON.stringify(store.todos));

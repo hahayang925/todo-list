@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 import { Row, Col, Checkbox, Button, Typography } from 'antd';
+import TodoListContext from '../../store/TodoListContext';
 import TodoForm from '../TodoForm';
 
 const TextCol = styled(Col)`{
@@ -14,8 +15,9 @@ const ActionButton = styled(Button)`{
   width: 48%;
 }`;
 
-const ListItem = ({ todo: { content, date, status, id }, onChange, deleteTodo, editTodo }) => {
-  const [isModalShow, toggleModal] = useState(false);
+const ListItem = ({ todo: { content, date, status, id }, onChange }) => {
+  const { deleteTodo } = useContext(TodoListContext);
+  const [isModalShow, setIsModalShow] = useState(false);
   return (
     <>
       <Row gutter="24" align="center" style={{ marginBottom: '10px' }}>
@@ -33,14 +35,14 @@ const ListItem = ({ todo: { content, date, status, id }, onChange, deleteTodo, e
           <Typography.Text>{dayjs(date).format('YYYY-MM-DD HH:mm')}</Typography.Text>
         </TextCol>
         <TextCol span={6} style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <ActionButton type="primary" onClick={() => toggleModal(true)}>Edit</ActionButton>
+          <ActionButton type="primary" onClick={() => setIsModalShow(true)}>Edit</ActionButton>
           <ActionButton danger onClick={() => deleteTodo(id)}>Delete</ActionButton>
         </TextCol>
       </Row>
       <TodoForm
         key={Math.random()}
         isModalShow={isModalShow}
-        onCancel={() => toggleModal(false)}
+        onCancel={() => setIsModalShow(false)}
         id={id}
         title="Edit Todo"
       />
@@ -56,8 +58,7 @@ ListItem.propTypes = {
     status: PropTypes.string.isRequired,
   }),
   onChange: PropTypes.func.isRequired,
-  deleteTodo: PropTypes.func.isRequired,
-  editTodo: PropTypes.func.isRequired,
+  // deleteTodo: PropTypes.func.isRequired,
 };
 
 ListItem.defaultProps = {

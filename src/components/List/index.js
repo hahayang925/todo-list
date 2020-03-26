@@ -29,7 +29,6 @@ const List = () => {
           key={todo.id}
           onChange={context.changeStatus}
           deleteTodo={context.deleteTodo}
-          editTodo={context.editTodo}
         />
       ))}
     </>
