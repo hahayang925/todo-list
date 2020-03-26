@@ -12,7 +12,6 @@ function ManageTodo() {
 
   return useObserver(() => (
     <main className="App" style={{ margin: '0 auto' }}>
-      { JSON.stringify(context.todos)}
       { context.todos.length > 0 ? <List /> : <h1>Do not have any todo yet...</h1> }
       <Button
         onClick={() => setIsModalShow(true)}
