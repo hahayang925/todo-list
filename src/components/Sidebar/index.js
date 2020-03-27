@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
+import { router } from '../../routes';
 
 const Sidebar = () => {
-  const menuList = [
-    { name: 'Todo', router: '/' },
-    { name: 'About', router: '/about' },
-    { name: 'Done', router: '/done' },
-  ];
   const [selectedMenu, setSelectedMenu] = useState('Todo');
   const location = useLocation();
 
   useEffect(() => {
-    setSelectedMenu(menuList.find((menu) => menu.router === location.pathname).name);
+    const matchRoute = router.find((route) => route.router === location.pathname);
+    if (matchRoute) setSelectedMenu(matchRoute.name);
   }, [location]);
 
   const handleClick = (e) => {
@@ -24,9 +21,9 @@ const Sidebar = () => {
   return (
     <Layout.Sider width={200}>
       <Menu theme="dark" selectedKeys={[selectedMenu]} onClick={handleClick}>
-        {menuList.map((menu) => (
-          <Menu.Item key={menu.name}>
-            <Link to={menu.router}>{menu.name}</Link>
+        {router.map((route) => (
+          <Menu.Item key={route.name}>
+            <Link to={route.router}>{route.name}</Link>
           </Menu.Item>
         ))}
       </Menu>

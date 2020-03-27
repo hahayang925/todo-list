@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 import { useObserver } from 'mobx-react';
 import { Row, Col, Typography } from 'antd';
 
-import TodoListContext from '../store/TodoListContext';
+import { useStore } from '../hooks';
 
 const ItemWrapper = styled.div`{
   text-align: center;
@@ -12,19 +12,18 @@ const ItemWrapper = styled.div`{
 }`;
 
 function DondeTodo() {
-  const context = useContext(TodoListContext);
-  const [todosDone, setTodosDone] = useState([]);
+  const store = useStore();
 
-  useEffect(() => {
-    const doneTodos = context.todos.filter((todo) => todo.status === 'done');
-    setTodosDone(doneTodos);
-  }, [context.todos]);
+  // useEffect(() => {
+  //   const doneTodos = store.todos.filter((todo) => todo.status === 'done');
+  //   setTodosDone(doneTodos);
+  // }, [store.todos]);
 
   return useObserver(() => (
     <ItemWrapper className="App" style={{ margin: '0 auto' }}>
       <Typography.Title>Done</Typography.Title>
-      {todosDone.length ? (
-        todosDone.map((todo) => {
+      {store.todosDone.length ? (
+        store.todosDone.map((todo) => {
           return (
             <Row key={todo.id} justify="center" gutter={16}>
               <Col col={6}>

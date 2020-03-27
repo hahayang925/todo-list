@@ -35,6 +35,9 @@ const StoreProvider = ({ children }) => {
       store.todos = store.todos.filter((todo) => todo.id !== id);
       localStorage.setItem('todos', JSON.stringify(store.todos));
     },
+    get todosDone() {
+      return store.todos.filter((todo) => todo.status === 'done');
+    },
   }));
 
   return (

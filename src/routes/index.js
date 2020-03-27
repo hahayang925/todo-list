@@ -1,14 +1,19 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Todo from '../modules/Todo';
-import About from '../modules/About';
 import Done from '../modules/Done';
+
+export const router = [
+  { name: 'Todo', router: '/', component: Todo },
+  { name: 'Done', router: '/done', component: Done },
+];
 
 const Routes = () => (
   <Switch>
-    <Route path="/" component={Todo} exact />
-    <Route path="/about" component={About} exact />
-    <Route path="/done" component={Done} exact />
+    {router.map((r) => (
+      <Route path={r.router} key={r.name} component={r.component} exact />
+    ))}
+    <Redirect to="/" />
   </Switch>
 );
 
