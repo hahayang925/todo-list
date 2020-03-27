@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useObserver } from 'mobx-react';
 import { Row, Col, Typography } from 'antd';
-import TodoListContext from '../../store/TodoListContext';
+import { useStore } from '../../hooks';
 import ListItem from '../ListItem';
 
 const List = () => {
-  const context = useContext(TodoListContext);
+  const store = useStore();
 
   return useObserver(() => (
     <>
@@ -23,12 +23,12 @@ const List = () => {
           <Typography.Text>Action</Typography.Text>
         </Col>
       </Row>
-      {context.todos.map((todo) => (
+      {store.todos.map((todo) => (
         <ListItem
           todo={todo}
           key={todo.id}
-          onChange={context.changeStatus}
-          deleteTodo={context.deleteTodo}
+          onChange={store.changeStatus}
+          deleteTodo={store.deleteTodo}
         />
       ))}
     </>

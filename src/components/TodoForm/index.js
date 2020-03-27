@@ -1,14 +1,14 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useObserver } from 'mobx-react';
 import PropTypes from 'prop-types';
 
 import { Input, Col, Row, Modal } from 'antd';
-import TodoListContext from '../../store/TodoListContext';
+import { useStore } from '../../hooks';
 
 const TodoForm = ({ isModalShow, onCancel, title, id }) => {
   const defaultTodo = { content: '', date: new Date(), status: 'undone', id: null };
-  const context = useContext(TodoListContext);
+  const store = useStore();
   const [todo, setTodo] = useState(defaultTodo);
 
   const onChange = (e) => {
@@ -23,9 +23,9 @@ const TodoForm = ({ isModalShow, onCancel, title, id }) => {
 
   const addTodo = () => {
     if (id) {
-      context.editTodo(id, todo);
+      store.editTodo(id, todo);
     } else {
-      context.addTodo(todo);
+      store.addTodo(todo);
       setTodo(defaultTodo);
     }
     onCancel();
@@ -33,12 +33,12 @@ const TodoForm = ({ isModalShow, onCancel, title, id }) => {
 
   useEffect(() => {
     if (id) {
-      const currTodo = context.todos.find((el) => el.id === id);
+      const currTodo = store.todos.find((el) => el.id === id);
       setTodo({
         ...currTodo,
       });
     }
-  }, [context.todos, id]);
+  }, [store.todos, id]);
 
   return useObserver(() => (
     <Modal visible={isModalShow} onCancel={onCancel} onOk={addTodo} title={title}>

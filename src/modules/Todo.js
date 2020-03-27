@@ -1,26 +1,26 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import { useObserver } from 'mobx-react';
 
 import { Button } from 'antd';
-import TodoListContext from '../store/TodoListContext';
+import { useModal, useStore } from '../hooks';
 import TodoForm from '../components/TodoForm';
 import List from '../components/List';
 
 function ManageTodo() {
-  const [isModalShow, setIsModalShow] = useState(false);
-  const context = useContext(TodoListContext);
+  const store = useStore();
+  const Modal = useModal();
 
   return useObserver(() => (
     <main className="App" style={{ margin: '0 auto' }}>
-      { context.todos.length > 0 ? <List /> : <h1>Do not have any todo yet...</h1> }
+      { store.todos.length > 0 ? <List /> : <h1>Do not have any todo yet...</h1> }
       <Button
-        onClick={() => setIsModalShow(true)}
+        onClick={Modal.openModal}
         size="large"
         style={{ marginTop: '16px' }}
       >
         ADD TODO
       </Button>
-      <TodoForm key={Math.random()} isModalShow={isModalShow} onCancel={() => setIsModalShow(false)} />
+      <TodoForm key={Math.random()} isModalShow={Modal.visible} onCancel={Modal.closeModal} />
     </main>
   ));
 }
