@@ -13,13 +13,16 @@ const List = () => {
         <Col span={2} align="center">
           <Typography.Text>Status</Typography.Text>
         </Col>
-        <Col align="center" span={10}>
+        <Col align="center" span={6}>
           <Typography.Text>Content</Typography.Text>
         </Col>
         <Col span={6}>
           <Typography.Text>Last Modified</Typography.Text>
         </Col>
         <Col span={6}>
+          <Typography.Text>Valid</Typography.Text>
+        </Col>
+        <Col span={4}>
           <Typography.Text>Action</Typography.Text>
         </Col>
       </Row>

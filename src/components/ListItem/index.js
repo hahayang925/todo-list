@@ -15,7 +15,7 @@ const ActionButton = styled(Button)`{
   width: 48%;
 }`;
 
-const ListItem = ({ todo: { content, date, status, id }, onChange }) => {
+const ListItem = ({ todo: { content, date, status, id, validDate }, onChange }) => {
   const store = useStore();
   const Modal = useModal();
   // const [isModalShow, setIsModalShow] = useState(false);
@@ -27,7 +27,7 @@ const ListItem = ({ todo: { content, date, status, id }, onChange }) => {
         </TextCol>
         <TextCol
           align="center"
-          span={10}
+          span={6}
           style={{ justifyContent: 'center' }}
         >
           <Typography.Text delete={status === 'done'}>{content}</Typography.Text>
@@ -35,7 +35,10 @@ const ListItem = ({ todo: { content, date, status, id }, onChange }) => {
         <TextCol span={6} style={{ justifyContent: 'center' }}>
           <Typography.Text>{dayjs(date).format('YYYY-MM-DD HH:mm')}</Typography.Text>
         </TextCol>
-        <TextCol span={6} style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <TextCol span={6} style={{ justifyContent: 'center' }}>
+          <Typography.Text>{dayjs(validDate).format('YYYY-MM-DD')}</Typography.Text>
+        </TextCol>
+        <TextCol span={4} style={{ display: 'flex', justifyContent: 'space-between' }}>
           <ActionButton type="primary" onClick={Modal.openModal}>Edit</ActionButton>
           <ActionButton danger onClick={() => store.deleteTodo(id)}>Delete</ActionButton>
         </TextCol>
@@ -55,6 +58,7 @@ ListItem.propTypes = {
   todo: PropTypes.shape({
     content: PropTypes.string.isRequired,
     date: PropTypes.number.isRequired,
+    validDate: PropTypes.number,
     id: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
   }),
