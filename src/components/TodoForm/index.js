@@ -40,13 +40,6 @@ const TodoForm = ({ isModalShow, onCancel, title, id }) => {
   };
 
   useEffect(() => {
-    const sendData = (e) => {
-      // debugger;
-      if (e.code === 'Enter' && todo.content) {
-        addTodo();
-      }
-    };
-    window.addEventListener('keydown', sendData);
     if (id) {
       const currTodo = store.todos.find((el) => el.id === id);
       setTodo({
@@ -54,8 +47,17 @@ const TodoForm = ({ isModalShow, onCancel, title, id }) => {
         validDate: moment(new Date(currTodo.validDate)),
       });
     }
+  }, [store.todos, id]);
+
+  useEffect(() => {
+    const sendData = (e) => {
+      if (e.code === 'Enter' && todo.content) {
+        addTodo();
+      }
+    };
+    window.addEventListener('keydown', sendData);
     return () => window.removeEventListener('keydown', sendData);
-  }, [store.todos, id, todo.content]);
+  }, [todo.content]);
 
   return useObserver(() => (
     <Modal visible={isModalShow} onCancel={onCancel} onOk={addTodo} title={title}>

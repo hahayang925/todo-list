@@ -58,7 +58,7 @@ ListItem.propTypes = {
   todo: PropTypes.shape({
     content: PropTypes.string.isRequired,
     date: PropTypes.number.isRequired,
-    validDate: PropTypes.number,
+    validDate: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
   }),
