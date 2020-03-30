@@ -41,6 +41,7 @@ const TodoForm = ({ isModalShow, onCancel, title, id }) => {
 
   useEffect(() => {
     const sendData = (e) => {
+      // debugger;
       if (e.code === 'Enter' && todo.content) {
         addTodo();
       }
@@ -54,7 +55,7 @@ const TodoForm = ({ isModalShow, onCancel, title, id }) => {
       });
     }
     return () => window.removeEventListener('keydown', sendData);
-  }, [store.todos, id]);
+  }, [store.todos, id, todo.content]);
 
   return useObserver(() => (
     <Modal visible={isModalShow} onCancel={onCancel} onOk={addTodo} title={title}>
