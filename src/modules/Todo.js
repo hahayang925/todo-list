@@ -3,7 +3,7 @@ import { useObserver } from 'mobx-react';
 
 import { Button } from 'antd';
 import { useModal, useStore } from '../hooks';
-import TodoForm from '../components/TodoForm/TodoForm';
+import TodoForm from '../components/TodoForm';
 import List from '../components/List';
 
 function ManageTodo() {

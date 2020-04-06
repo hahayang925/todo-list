@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useObserver } from 'mobx-react';
 import { Row, Col, Typography } from 'antd';
-import { useStore } from '../../hooks';
+import { useStore, useModal } from '../../hooks';
 import ListItem from '../ListItem';
+import TodoForm from '../TodoForm';
 
 const List = () => {
   const store = useStore();
+  const Modal = useModal();
+  const [id, setId] = useState();
+
+  const openModal = (i) => {
+    setId(i);
+    Modal.openModal();
+  };
 
   return useObserver(() => (
     <>
@@ -32,8 +40,20 @@ const List = () => {
           key={todo.id}
           onChange={store.changeStatus}
           deleteTodo={store.deleteTodo}
+          openModal={openModal}
         />
       ))}
+      {
+        Modal.visible && (
+          <TodoForm
+            key={Math.random()}
+            isModalShow={Modal.visible}
+            onCancel={Modal.closeModal}
+            id={id}
+            title="Edit Todo"
+          />
+        )
+      }
     </>
   ));
 };

@@ -32,7 +32,7 @@ const TodoForm = ({ isModalShow, onCancel, title, id }) => {
     const data = {
       content,
       date: new Date().getTime(),
-      validDate: validDate.toDate().getTime(),
+      validDate: validDate ? validDate.toDate().getTime() : null,
       status: todo.status || 'undone',
       id: todo.id || uuidv4(),
     };
@@ -55,9 +55,11 @@ const TodoForm = ({ isModalShow, onCancel, title, id }) => {
         addTodo();
       }
     };
+    // if (isModalShow) {
     window.addEventListener('keydown', sendData);
     return () => window.removeEventListener('keydown', sendData);
-  }, [todo.content]);
+    // }
+  }, [todo.content, isModalShow]);
 
   return useObserver(() => (
     <Modal visible={isModalShow} onCancel={onCancel} onOk={addTodo} title={title}>
@@ -77,7 +79,7 @@ const TodoForm = ({ isModalShow, onCancel, title, id }) => {
         </Form.Item>
 
         <Form.Item label="Valid Date" name="validDate">
-          <DatePicker defaultValue={moment(new Date(), dateFormat)} format={dateFormat} />
+          <DatePicker defaultValue={todo.validDate} format={dateFormat} />
         </Form.Item>
       </Form>
     </Modal>

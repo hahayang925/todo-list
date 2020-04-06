@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import { BrowserRouter } from 'react-router-dom';
-import ProductList from '@bit/hahayang.react-ui.product-list';
+// import ProductList from '@bit/hahayang.react-ui.product-list';
 import Routes from '../routes';
 import Sidebar from '../components/Sidebar';
 
@@ -16,7 +16,7 @@ function AppContainer() {
       <Layout>
         <BrowserRouter>
           <Sidebar />
-          <ProductList />
+          {/* <ProductList /> */}
           <div id="anchor">testing</div>
           <Content>
             <Routes style={{ height: '100vh' }} />

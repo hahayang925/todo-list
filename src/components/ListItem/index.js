@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 import { Row, Col, Checkbox, Button, Typography } from 'antd';
-import { useModal, useStore } from '../../hooks';
-import TodoForm from '../TodoForm';
+import { useStore } from '../../hooks';
 
 const TextCol = styled(Col)`{
   display: flex;
@@ -15,10 +14,10 @@ const ActionButton = styled(Button)`{
   width: 48%;
 }`;
 
-const ListItem = ({ todo: { content, date, status, id, validDate }, onChange }) => {
+const ListItem = ({ todo: { content, date, status, id, validDate }, onChange, openModal }) => {
   const store = useStore();
-  const Modal = useModal();
   // const [isModalShow, setIsModalShow] = useState(false);
+
   return (
     <>
       <Row gutter="24" align="center" style={{ marginBottom: '10px' }}>
@@ -39,17 +38,21 @@ const ListItem = ({ todo: { content, date, status, id, validDate }, onChange }) 
           <Typography.Text>{dayjs(validDate).format('YYYY-MM-DD')}</Typography.Text>
         </TextCol>
         <TextCol span={4} style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <ActionButton type="primary" onClick={Modal.openModal}>Edit</ActionButton>
+          <ActionButton type="primary" onClick={() => openModal(id)}>Edit</ActionButton>
           <ActionButton danger onClick={() => store.deleteTodo(id)}>Delete</ActionButton>
         </TextCol>
       </Row>
-      <TodoForm
-        key={Math.random()}
-        isModalShow={Modal.visible}
-        onCancel={Modal.closeModal}
-        id={id}
-        title="Edit Todo"
-      />
+      {/* {
+        Modal.visible && (
+          <TodoForm
+            key={Math.random()}
+            isModalShow={Modal.visible}
+            onCancel={Modal.closeModal}
+            id={id}
+            title="Edit Todo"
+          />
+        )
+      } */}
     </>
   );
 };
