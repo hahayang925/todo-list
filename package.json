@@ -4,7 +4,6 @@
   "private": true,
   "homepage": "https://hahayang925.github.io/todo-list/",
   "dependencies": {
-    "@bit/hahayang.react-ui.product-list": "file:./components/product-list",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -19,7 +18,8 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "styled-components": "^5.0.1",
-    "uuid": "^7.0.2"
+    "uuid": "^7.0.2",
+    "@bit/hahayang.react-ui.product-list": "0.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

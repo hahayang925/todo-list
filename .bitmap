@@ -14,29 +14,6 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "hahayang.react-ui/product-list@0.0.1": {
-        "files": [
-            {
-                "name": "index.js",
-                "relativePath": "index.js",
-                "test": false
-            },
-            {
-                "name": "product-list.css",
-                "relativePath": "product-list.css",
-                "test": false
-            },
-            {
-                "name": "products.js",
-                "relativePath": "products.js",
-                "test": false
-            }
-        ],
-        "mainFile": "index.js",
-        "rootDir": "components/product-list",
-        "origin": "IMPORTED",
-        "originallySharedDir": "src/components/product-list"
-    },
     "sidebar": {
         "files": [
             {
